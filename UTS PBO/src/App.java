@@ -13,7 +13,7 @@ public class App {
         }
         return -1;
     }
-
+    
     public static int getIndexFromMahasiswa(ArrayList<mahasiswa> array, String studentID) {
         int index = 0;
         for (mahasiswa mhs : array) {
@@ -42,13 +42,12 @@ public class App {
         System.out.flush();
     } 
 
-
     public static ArrayList<mahasiswa> initMahasiswa(ArrayList<mahasiswa> Mahasiswa){
-        mahasiswa mhs1 = new mahasiswa("SI#1", "A", "Sistem Informasi", "2021");
+        mahasiswa mhs1 = new mahasiswa("001", "Ariq", "Sistem Informasi", "2021");
         Mahasiswa.add(mhs1);
-        mahasiswa mhs2 = new mahasiswa("SI#2", "B", "Sistem Informasi", "2021");
+        mahasiswa mhs2 = new mahasiswa("002", "Billy", "Sistem Informasi", "2021");
         Mahasiswa.add(mhs2);
-        mahasiswa mhs3 = new mahasiswa("SI#3", "C", "Sistem Informasi", "2021");
+        mahasiswa mhs3 = new mahasiswa("003", "Jason", "Sistem Informasi", "2021");
         Mahasiswa.add(mhs3);
         return Mahasiswa;
     }
@@ -82,22 +81,21 @@ public class App {
         initTerm(Term);
         initMataKuliah(matakuliah);
 
-
         Scanner keyboard = new Scanner(System.in);
         String yn = "y";
         while(yn.equalsIgnoreCase("y")){
             clearScreen();
-            System.out.println("                      UTS PBO                      ");
+            System.out.println("                   UTS PBO                   ");
             System.out.println("---------------------------------------------------");
-            System.out.println("1. Input/Cetak Mata Kuliah");
-            System.out.println("2. Input/Cetak Data Mahasiswa");
-            System.out.println("3. Input/Cetak Data Term/Semester");
-            System.out.println("4. Input/Cetak Data KHS (Overall)");
-            System.out.println("5. Input/Cetak Data Detail KHS (MatKul)");
-            System.out.println("6. Cetak IPK (sementara) Mahasiswa");
-            System.out.println("7. Cetak Transkrip (sementara) Mahasiswa");
+            System.out.println("1. Menu Mata Kuliah");
+            System.out.println("2. Menu Data Mahasiswa");
+            System.out.println("3. Menu Data Term/Semester");
+            System.out.println("4. Menu Data KHS (Overall)");
+            System.out.println("5. Menu Data Detail KHS (MatKul)");
+            System.out.println("6. IPK (sementara) Mahasiswa");
+            System.out.println("7. Transkrip (sementara) Mahasiswa");
             System.out.println("8. Keluar");
-            System.out.print("Pilihan Anda [1/2/3/4/5/6/7/8] ? ");
+            System.out.print("Pilihan Anda [1-8]:");
             String pilihan = keyboard.next();
             
             clearScreen();
@@ -131,7 +129,7 @@ public class App {
                     if (matakuliah.size() > 0) {
                         int idx = getIndexFromMataKuliah(matakuliah, kode);
                         if (idx == -1) {
-                            System.out.println("Kode yang Anda masukkan invalid..");
+                            System.out.println("Kode tidak ditemukan");
                         }
                         else {
                             clearScreen();
@@ -142,7 +140,7 @@ public class App {
                         }
                     }
                     else {
-                        System.out.println("Tidak ada data mata kuliah yang ditemukan..");
+                        System.out.println("data mata kuliah tidak ditemukan");
                     }
                 }
                 else if (opsi.equals("3")) {
@@ -157,7 +155,7 @@ public class App {
                     System.out.println("----------------------------------------------------------------");
                 }
                 else {
-                    System.out.println("Pilihan tidak tersedia..");
+                    System.out.println("Pilihan tidak tersedia");
                 }
             }
 
@@ -167,7 +165,7 @@ public class App {
                 System.out.println("1. Input");
                 System.out.println("2. Cetak Mahasiswa (studentID)");
                 System.out.println("3. Cetak Semua Data Mahasiswa");
-                System.out.print("Pilihan Anda [1/2/3] ? ");
+                System.out.print("Pilihan Anda [1-3] ? ");
                 String opsi = keyboard.next();
 
                 clearScreen();
@@ -199,9 +197,9 @@ public class App {
                             clearScreen();
                             System.out.println("Data Mahasiswa");
                             System.out.println("--------------");
-                            System.out.println("Nama          : " + mhs.get(idx).getNama());
-                            System.out.println("Jurusan       : " + mhs.get(idx).getJurusan());
-                            System.out.println("Tahun masuk   : " + mhs.get(idx).getTahunmasuk());
+                            System.out.println("Nama         : " + mhs.get(idx).getNama());
+                            System.out.println("Jurusan      : " + mhs.get(idx).getJurusan());
+                            System.out.println("Tahun masuk  : " + mhs.get(idx).getTahunmasuk());
                         }
                     }
                     else {
@@ -364,14 +362,14 @@ public class App {
                     System.out.print("Masukkan kode KHS         : ");
                     String kodeKHS = keyboard.nextLine();
 
-                    int idx = 0; // cari index array mahasiswa
-                    int index = 0; // cari index array khs dalam mahasiswa
+                    int idx = 0; 
+                    int index = 0; 
                     boolean temu = false;
                     for (mahasiswa mahasiswa2 : mhs) {
                         for (khs khs : mahasiswa2.getKhs()) {
                             if (khs.getKode_khs().equals(kodeKHS)) {
                                 temu = true;
-                                System.out.print("Masukkan kode mata kuliah : ");
+                                System.out.print("Masukkan kode mata kuliah: ");
                                 String matKul = keyboard.nextLine();
                                 int IDX = getIndexFromMataKuliah(matakuliah, matKul);
                                 if (IDX != -1) {
@@ -381,7 +379,7 @@ public class App {
                                     Mahasiswa.Khs.get(index).khsd.add(new khsdetail(kodeDetailKHS, kodeKHS, nilai, matakuliah.get(IDX) ));
                                 }
                         else {
-                            System.out.println("Kode mata kuliah yang Anda masukkan invalid..");
+                            System.out.println("Kode mata kuliah tidak ditemukan");
                         }
                                 break;
                             }
@@ -391,7 +389,7 @@ public class App {
                         idx++;
                     }
                     if(temu == false) {
-                        System.out.println("Kode KHS yang Anda masukkan invalid..");
+                        System.out.println("Kode KHS tidak ditemukan");
                     }
                 }
                 else if (opsi.equals("2")) {
@@ -419,7 +417,7 @@ public class App {
                                     Index++;
                                 }
                                 if(ketemu == false) {
-                                    System.out.println("\nKode detail KHS yang Anda masukkan invalid..");
+                                    System.out.println("\nKode detail KHS tidak ditemukan");
                                 }
                                 break;
                             }
@@ -429,11 +427,11 @@ public class App {
                         index++;
                     }
                     if(temu == false) {
-                        System.out.println("Kode KHS yang Anda masukkan invalid..");
+                        System.out.println("Kode KHS yang tidak ditemukan");
                     }
                 }
                 else {
-                    System.out.println("Pilihan tidak tersedia..");
+                    System.out.println("Pilihan tidak ditemukan");
                 }
             }
             
@@ -444,7 +442,7 @@ public class App {
                 String studentID = keyboard.next();
                 int idx = getIndexFromMahasiswa(mhs, studentID);
                 if (idx == -1) {
-                    System.out.println("\nStudentID yang Anda masukkan invalid..");
+                    System.out.println("\nStudentID tidak valid");
                 }
                 else {
                     clearScreen();
@@ -460,14 +458,13 @@ public class App {
             }
 
             else if (pilihan.equals("7")) {
-                // kodematkul, matkul, sks, bobot, gradepoint
                 System.out.println("Transkrip Nilai Mahasiswa");
                 System.out.println("-------------------------");
                 System.out.print("Masukkan studentID : ");
                 String studentID = keyboard.next();
                 int idx = getIndexFromMahasiswa(mhs, studentID);
                 if (idx == -1) {
-                    System.out.println("\nstudentID yang Anda masukkan invalid..");
+                    System.out.println("\nstudentID tidak valid");
                 }
                 else {
                     clearScreen();
@@ -480,7 +477,7 @@ public class App {
                     System.out.println("----------------------------------------------------------------");
                     
                     if (mhs.get(idx).Khs.size() == 0) {
-                        System.out.println("\nTidak ada KHS yang ditemukan..");
+                        System.out.println("\n KHS tidak ditemukan..");
                     }
                     else {
                         System.out.println("Kode MatKul\tNama MatKul\tSks\tNilai\tAngka Kualitas");
@@ -503,14 +500,13 @@ public class App {
             }
 
             else {
-                System.out.println("Pilihan tidak tersedia..");
+                System.out.println("Pilihan tidak ditemukan");
             }
-
             System.out.print("\nKembali ke halaman utama [y/n] ? ");
             yn = keyboard.next();
         }
-
             clearScreen();
             System.out.println("\nTerima Kasih!\n");
             keyboard.close();
-        }}
+        }
+    }
